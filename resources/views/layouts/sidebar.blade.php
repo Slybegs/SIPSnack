@@ -59,6 +59,12 @@
                   <p>Produk</p>
                 </a>
             </li>
+            <li class="nav-item">
+              <a href="/bank/bank" class="nav-link">
+                <i class="nav-icon fas fa-university"></i>
+                <p>Bank</p>
+              </a>
+          </li>
             {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('logout') }}"
               onclick="event.preventDefault();

@@ -12,7 +12,7 @@
         "laravel/tinker": "^2.8"
     },
     "require-dev": {
-        "appzcoder/crud-generator": "^3.3",
+        "appzcoder/crud-generator": "*",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
