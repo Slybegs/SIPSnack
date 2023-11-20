@@ -60,6 +60,12 @@
                 </a>
             </li>
             <li class="nav-item">
+              <a href="/transaksi/transaksi" class="nav-link">
+                <i class="nav-icon fas fa-university"></i>
+                <p>Transaksi</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="/bank/bank" class="nav-link">
                 <i class="nav-icon fas fa-university"></i>
                 <p>Bank</p>

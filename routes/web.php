@@ -22,5 +22,3 @@ Route::get('/', function () {
 Route::resource('/produk/produk', ProdukController::class);
 
 Route::resource('/bank/bank', BankController::class);
-
-
