@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Produk\ProdukController;
+use App\Http\Controllers\Transaksi\TransaksiController;
 use App\Http\Controllers\Bank\BankController;
 
 /*
@@ -22,3 +23,7 @@ Route::get('/', function () {
 Route::resource('/produk/produk', ProdukController::class);
 
 Route::resource('/bank/bank', BankController::class);
+
+Route::resource('/transaksi/transaksi', TransaksiController::class);
+
+Route::patch('/transaksi/transaksi/{id}/confirm-status',[TransaksiController::class, 'confirmStatus']);
