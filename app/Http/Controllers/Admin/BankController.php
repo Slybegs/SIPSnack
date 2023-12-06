@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Produk;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\Models\Produk;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 
-class ProdukController extends Controller
+class BankController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,18 +21,15 @@ class ProdukController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $produk = Produk::where('produkID', 'LIKE', "%$keyword%")
-                ->orWhere('nama', 'LIKE', "%$keyword%")
-                ->orWhere('kategori', 'LIKE', "%$keyword%")
-                ->orWhere('deskripsi', 'LIKE', "%$keyword%")
-                ->orWhere('expired', 'LIKE', "%$keyword%")
-                ->orWhere('berat', 'LIKE', "%$keyword%")
+            $bank = Bank::where('namaBank', 'LIKE', "%$keyword%")
+                ->orWhere('noRek', 'LIKE', "%$keyword%")
+                ->orWhere('namaRek', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $produk = Produk::latest()->paginate($perPage);
+            $bank = Bank::latest()->paginate($perPage);
         }
 
-        return view('produk.produk.index', compact('produk'));
+        return view('bank.bank.index', compact('bank'));
     }
 
     /**
@@ -42,7 +39,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('produk.produk.create');
+        return view('bank.bank.create');
     }
 
     /**
@@ -57,9 +54,9 @@ class ProdukController extends Controller
         
         $requestData = $request->all();
         
-        Produk::create($requestData);
+        Bank::create($requestData);
 
-        return redirect('produk/produk')->with('flash_message', 'Produk added!');
+        return redirect('bank/bank')->with('flash_message', 'Bank added!');
     }
 
     /**
@@ -71,9 +68,9 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        $produk = Produk::findOrFail($id);
+        $bank = Bank::findOrFail($id);
 
-        return view('produk.produk.show', compact('produk'));
+        return view('bank.bank.show', compact('bank'));
     }
 
     /**
@@ -85,9 +82,9 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        $produk = Produk::findOrFail($id);
+        $bank = Bank::findOrFail($id);
 
-        return view('produk.produk.edit', compact('produk'));
+        return view('bank.bank.edit', compact('bank'));
     }
 
     /**
@@ -103,10 +100,10 @@ class ProdukController extends Controller
         
         $requestData = $request->all();
         
-        $produk = Produk::findOrFail($id);
-        $produk->update($requestData);
+        $bank = Bank::findOrFail($id);
+        $bank->update($requestData);
 
-        return redirect('produk/produk')->with('flash_message', 'Produk updated!');
+        return redirect('bank/bank')->with('flash_message', 'Bank updated!');
     }
 
     /**
@@ -118,8 +115,8 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        Produk::destroy($id);
+        Bank::destroy($id);
 
-        return redirect('produk/produk')->with('flash_message', 'Produk deleted!');
+        return redirect('bank/bank')->with('flash_message', 'Bank deleted!');
     }
 }

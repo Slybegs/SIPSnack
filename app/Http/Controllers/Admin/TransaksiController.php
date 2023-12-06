@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Bank;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\Models\Bank;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
-class BankController extends Controller
+class TransaksiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,15 +21,21 @@ class BankController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $bank = Bank::where('namaBank', 'LIKE', "%$keyword%")
-                ->orWhere('noRek', 'LIKE', "%$keyword%")
-                ->orWhere('namaRek', 'LIKE', "%$keyword%")
+            $transaksi = Transaksi::where('produkID', 'LIKE', "%$keyword%")
+                ->orWhere('nomorTransaksi', 'LIKE', "%$keyword%")
+                ->orWhere('noResi', 'LIKE', "%$keyword%")
+                ->orWhere('kurir', 'LIKE', "%$keyword%")
+                ->orWhere('ongkir', 'LIKE', "%$keyword%")
+                ->orWhere('total', 'LIKE', "%$keyword%")
+                ->orWhere('status', 'LIKE', "%$keyword%")
+                ->orWhere('date', 'LIKE', "%$keyword%")
+                ->orWhere('address', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $bank = Bank::latest()->paginate($perPage);
+            $transaksi = Transaksi::latest()->paginate($perPage);
         }
 
-        return view('bank.bank.index', compact('bank'));
+        return view('transaksi.transaksi.index', compact('transaksi'));
     }
 
     /**
@@ -39,7 +45,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('bank.bank.create');
+        return view('transaksi.transaksi.create');
     }
 
     /**
@@ -54,9 +60,9 @@ class BankController extends Controller
         
         $requestData = $request->all();
         
-        Bank::create($requestData);
+        Transaksi::create($requestData);
 
-        return redirect('bank/bank')->with('flash_message', 'Bank added!');
+        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi added!');
     }
 
     /**
@@ -68,9 +74,9 @@ class BankController extends Controller
      */
     public function show($id)
     {
-        $bank = Bank::findOrFail($id);
+        $transaksi = Transaksi::findOrFail($id);
 
-        return view('bank.bank.show', compact('bank'));
+        return view('transaksi.transaksi.show', compact('transaksi'));
     }
 
     /**
@@ -82,9 +88,9 @@ class BankController extends Controller
      */
     public function edit($id)
     {
-        $bank = Bank::findOrFail($id);
+        $transaksi = Transaksi::findOrFail($id);
 
-        return view('bank.bank.edit', compact('bank'));
+        return view('transaksi.transaksi.edit', compact('transaksi'));
     }
 
     /**
@@ -95,15 +101,25 @@ class BankController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
+    public function confirmStatus(Request $request, $id)
+    {
+        
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->update(['status' => 'Pengiriman']);
+
+        return redirect('transaksi/transaksi')->with('flash_message', 'Status berhasil diperbarui!');
+    }
+
     public function update(Request $request, $id)
     {
         
         $requestData = $request->all();
         
-        $bank = Bank::findOrFail($id);
-        $bank->update($requestData);
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->update($requestData);
+        print("LOL");
 
-        return redirect('bank/bank')->with('flash_message', 'Bank updated!');
+        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi updated!');
     }
 
     /**
@@ -115,8 +131,8 @@ class BankController extends Controller
      */
     public function destroy($id)
     {
-        Bank::destroy($id);
+        Transaksi::destroy($id);
 
-        return redirect('bank/bank')->with('flash_message', 'Bank deleted!');
+        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi deleted!');
     }
 }

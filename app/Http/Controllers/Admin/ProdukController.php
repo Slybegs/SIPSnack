@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Transaksi;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\Models\Transaksi;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
-class TransaksiController extends Controller
+class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,21 +21,18 @@ class TransaksiController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $transaksi = Transaksi::where('produkID', 'LIKE', "%$keyword%")
-                ->orWhere('nomorTransaksi', 'LIKE', "%$keyword%")
-                ->orWhere('noResi', 'LIKE', "%$keyword%")
-                ->orWhere('kurir', 'LIKE', "%$keyword%")
-                ->orWhere('ongkir', 'LIKE', "%$keyword%")
-                ->orWhere('total', 'LIKE', "%$keyword%")
-                ->orWhere('status', 'LIKE', "%$keyword%")
-                ->orWhere('date', 'LIKE', "%$keyword%")
-                ->orWhere('address', 'LIKE', "%$keyword%")
+            $produk = Produk::where('produkID', 'LIKE', "%$keyword%")
+                ->orWhere('nama', 'LIKE', "%$keyword%")
+                ->orWhere('kategori', 'LIKE', "%$keyword%")
+                ->orWhere('deskripsi', 'LIKE', "%$keyword%")
+                ->orWhere('expired', 'LIKE', "%$keyword%")
+                ->orWhere('berat', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $transaksi = Transaksi::latest()->paginate($perPage);
+            $produk = Produk::latest()->paginate($perPage);
         }
 
-        return view('transaksi.transaksi.index', compact('transaksi'));
+        return view('produk.produk.index', compact('produk'));
     }
 
     /**
@@ -45,7 +42,7 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        return view('transaksi.transaksi.create');
+        return view('produk.produk.create');
     }
 
     /**
@@ -60,9 +57,9 @@ class TransaksiController extends Controller
         
         $requestData = $request->all();
         
-        Transaksi::create($requestData);
+        Produk::create($requestData);
 
-        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi added!');
+        return redirect('produk/produk')->with('flash_message', 'Produk added!');
     }
 
     /**
@@ -74,9 +71,9 @@ class TransaksiController extends Controller
      */
     public function show($id)
     {
-        $transaksi = Transaksi::findOrFail($id);
+        $produk = Produk::findOrFail($id);
 
-        return view('transaksi.transaksi.show', compact('transaksi'));
+        return view('produk.produk.show', compact('produk'));
     }
 
     /**
@@ -88,9 +85,9 @@ class TransaksiController extends Controller
      */
     public function edit($id)
     {
-        $transaksi = Transaksi::findOrFail($id);
+        $produk = Produk::findOrFail($id);
 
-        return view('transaksi.transaksi.edit', compact('transaksi'));
+        return view('produk.produk.edit', compact('produk'));
     }
 
     /**
@@ -101,25 +98,15 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function confirmStatus(Request $request, $id)
-    {
-        
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->update(['status' => 'Pengiriman']);
-
-        return redirect('transaksi/transaksi')->with('flash_message', 'Status berhasil diperbarui!');
-    }
-
     public function update(Request $request, $id)
     {
         
         $requestData = $request->all();
         
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->update($requestData);
-        print("LOL");
+        $produk = Produk::findOrFail($id);
+        $produk->update($requestData);
 
-        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi updated!');
+        return redirect('produk/produk')->with('flash_message', 'Produk updated!');
     }
 
     /**
@@ -131,8 +118,8 @@ class TransaksiController extends Controller
      */
     public function destroy($id)
     {
-        Transaksi::destroy($id);
+        Produk::destroy($id);
 
-        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi deleted!');
+        return redirect('produk/produk')->with('flash_message', 'Produk deleted!');
     }
 }
