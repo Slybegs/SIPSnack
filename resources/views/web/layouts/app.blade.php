@@ -9,12 +9,6 @@
 
   <!-- Bootstrap -->
   @section('css')
-  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/index.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="{{ asset('vendor/sweetalert/sweetalert.css') }}">
-  <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
     @vite(['resources/sass/app.scss','resources/js/app.js',])
   @show
 
@@ -39,11 +33,18 @@
                 <input type="text" class="form-control nosubmit" placeholder="Search...">
               </form>
             <ul class="navbar-nav mb-2 mb-lg-0">
+              @guest('web')
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Login</a>
+                <a class="nav-link active" aria-current="page" href="login">Login</a>
               </li>
+              @endguest
+              @auth('web')
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                <span class="navbar-text">Hi, {{ auth()->user()->name }}</span>
+              </li>
+              @endauth
+              <li class="nav-item">
+                <a class="nav-link" href="cart"><i class="fa-solid fa-cart-shopping"></i></a>
               </li>
             </ul>
           </div>

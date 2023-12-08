@@ -11,8 +11,15 @@
                 </div>
             </div>
             <div class="col-6">
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+           </ul>
                 <div class="card px-5 bg-white shadow-lg rounded border-0" style="margin-left: 50px; padding: 24px 40px 32px; width: 400px;">
-                    <div class="card-body">
+                    <form method="POST" action="register" class="card-body">
+                        @csrf
                         <h3 class="card-title text-center">Daftar Sekarang</h5>
                         <p class="card-text text-center mb-5">Sudah punya akun? <a href="login">Masuk</a></p>
                         <div class="mb-3">
@@ -34,7 +41,7 @@
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary">Masuk</button>
                         </div>
-                    </div>
+                    </form>
 
                 </div>
             </div>

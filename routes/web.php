@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Produk\ProdukController;
-use App\Http\Controllers\Transaksi\TransaksiController;
-use App\Http\Controllers\Bank\BankController;
+use App\Http\Controllers\Web\Auth\LoginController;
+use App\Http\Controllers\Web\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +15,18 @@ use App\Http\Controllers\Bank\BankController;
 |
 */
 
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('web.home');
 });
 
-Route::resource('/produk/produk', ProdukController::class);
-
-Route::resource('/bank/bank', BankController::class);
-
-Route::resource('/transaksi/transaksi', TransaksiController::class);
-
-Route::patch('/transaksi/transaksi/{id}/confirm-status',[TransaksiController::class, 'confirmStatus']);
+Route::get('/detail', function () {
+    return view('web.detail');
+});
