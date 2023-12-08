@@ -6,9 +6,9 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Edit Produk</div>
+                    <div class="card-header">Create New Produk</div>
                     <div class="card-body">
-                        <a href="{{ url('/produk/produk') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ route('admin.produk.index') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -20,11 +20,10 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/produk/produk/' . $produk->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                        <form method="POST" action="{{ route('admin.produk.store') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            @include ('produk.produk.form', ['formMode' => 'edit'])
+                            @include ('admin.produk.form', ['formMode' => 'create'])
 
                         </form>
 
