@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Auth\LoginController;
 use App\Http\Controllers\Web\Auth\RegisterController;
+use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +25,6 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
 
-Route::get('/', function () {
-    return view('web.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/detail', function () {
-    return view('web.detail');
-});
+Route::get('produk/{produk}', [ProdukController::class, 'show'])->name('produk.show');
