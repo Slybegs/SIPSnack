@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
 {
@@ -32,7 +32,7 @@ class ProdukController extends Controller
             $produk = Produk::latest()->paginate($perPage);
         }
 
-        return view('produk.produk.index', compact('produk'));
+        return view('admin.produk.index', compact('produk'));
     }
 
     /**
@@ -42,7 +42,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('produk.produk.create');
+        return view('admin.produk.create');
     }
 
     /**
@@ -54,12 +54,17 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        
         $requestData = $request->all();
         
-        Produk::create($requestData);
+        $produk = Produk::create($requestData);
 
-        return redirect('produk/produk')->with('flash_message', 'Produk added!');
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('produk', 'public');
+            $produk->gambar = $path;
+            $produk->save();
+        }
+
+        return redirect()->route('admin.produk.index')->with('flash_message', 'Produk added!');
     }
 
     /**
@@ -73,7 +78,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id);
 
-        return view('produk.produk.show', compact('produk'));
+        return view('admin.produk.show', compact('produk'));
     }
 
     /**
@@ -87,7 +92,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id);
 
-        return view('produk.produk.edit', compact('produk'));
+        return view('admin.produk.edit', compact('produk'));
     }
 
     /**
@@ -106,7 +111,15 @@ class ProdukController extends Controller
         $produk = Produk::findOrFail($id);
         $produk->update($requestData);
 
-        return redirect('produk/produk')->with('flash_message', 'Produk updated!');
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('produk', 'public');
+            $produk->gambar = $path;
+            $oldImage = $produk->getOriginal('gambar');
+            $produk->save();
+            Storage::disk('public')->delete($oldImage);
+        }
+
+        return redirect()->route('admin.produk.index')->with('flash_message', 'Produk updated!');
     }
 
     /**
@@ -120,6 +133,6 @@ class ProdukController extends Controller
     {
         Produk::destroy($id);
 
-        return redirect('produk/produk')->with('flash_message', 'Produk deleted!');
+        return redirect()->route('admin.produk.index')->with('flash_message', 'Produk deleted!');
     }
 }

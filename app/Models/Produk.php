@@ -25,7 +25,7 @@ class Produk extends Model
      *
      * @var array
      */
-    protected $fillable = ['produkID', 'nama', 'kategori', 'deskripsi', 'expired', 'berat'];
+    protected $fillable = ['produkID', 'nama', 'kategori', 'harga_beli', 'harga_jual', 'deskripsi', 'expired', 'berat'];
 
     
 }

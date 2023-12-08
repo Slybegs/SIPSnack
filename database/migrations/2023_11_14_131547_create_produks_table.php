@@ -18,10 +18,13 @@ class CreateProduksTable extends Migration
             $table->string('produkID')->nullable();
             $table->string('nama')->nullable();
             $table->string('kategori')->nullable();
+            $table->decimal('harga_beli')->nullable();
+            $table->decimal('harga_jual')->nullable();
             $table->text('deskripsi')->nullable();
             $table->string('expired')->nullable();
             $table->integer('berat')->nullable();
-            });
+            $table->string('gambar')->nullable();
+        });
     }
 
     /**
