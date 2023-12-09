@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\Auth\LoginController;
 use App\Http\Controllers\Web\Auth\RegisterController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\ProdukController;
+use App\Http\Controllers\Web\KeranjangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,7 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('produk/{produk}', [ProdukController::class, 'show'])->name('produk.show');
+
+Route::group(['middleware' => 'auth:web'], function () {
+    Route::resource('keranjang', KeranjangController::class);
+});
