@@ -32,7 +32,7 @@
               @endguest
               @auth('web')
               <li class="nav-item">
-                <span class="nav-link">Hi, {{ auth()->user()->name }}</span>
+                <a class="nav-link" href="{{ route('transaksi.index')}}">Riwayat Belanja</a>
               </li>
               @endauth
               <li class="nav-item">

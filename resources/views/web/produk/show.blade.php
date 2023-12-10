@@ -20,7 +20,7 @@
           </div>
   
           <div class="mb-3">
-            <span class="h5">IDR {{ number_format($produk->harga_jual) }}</span>
+            <span class="h5">Rp{{ number_format($produk->harga_jual) }}</span>
             <span class="text-muted">/per piece</span>
           </div>
   
@@ -83,7 +83,7 @@
     
                     </div>
                     <div class="product-name">Potabee</div>
-                    <div class="product-price">IDR 50.000</div>
+                    <div class="product-price">Rp50.000</div>
                     <div class="product-info">Terjual 1000+</div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
     
                     </div>
                     <div class="product-name">Potabee</div>
-                    <div class="product-price">IDR 50.000</div>
+                    <div class="product-price">Rp50.000</div>
                     <div class="product-info">Terjual 1000+</div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
     
                     </div>
                     <div class="product-name">Potabee</div>
-                    <div class="product-price">IDR 50.000</div>
+                    <div class="product-price">Rp50.000</div>
                     <div class="product-info">Terjual 1000+</div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
     
                     </div>
                     <div class="product-name">Potabee</div>
-                    <div class="product-price">IDR 50.000</div>
+                    <div class="product-price">Rp50.000</div>
                     <div class="product-info">Terjual 1000+</div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
     
                     </div>
                     <div class="product-name">Potabee</div>
-                    <div class="product-price">IDR 50.000</div>
+                    <div class="product-price">Rp50.000</div>
                     <div class="product-info">Terjual 1000+</div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
     
                     </div>
                     <div class="product-name">Potabee</div>
-                    <div class="product-price">IDR 50.000</div>
+                    <div class="product-price">Rp50.000</div>
                     <div class="product-info">Terjual 1000+</div>
                 </div>
             </div>
@@ -149,7 +149,7 @@
     
                     </div>
                     <div class="product-name">Potabee</div>
-                    <div class="product-price">IDR 50.000</div>
+                    <div class="product-price">Rp50.000</div>
                     <div class="product-info">Terjual 1000+</div>
                 </div>
             </div>
@@ -160,7 +160,7 @@
     
                     </div>
                     <div class="product-name">Potabee</div>
-                    <div class="product-price">IDR 50.000</div>
+                    <div class="product-price">Rp50.000</div>
                     <div class="product-info">Terjual 1000+</div>
                 </div>
             </div>
