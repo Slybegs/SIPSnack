@@ -11,6 +11,11 @@
                 </div>
             </div>
             <div class="col-6">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+               </ul>
                 <div class="card px-5 bg-white shadow-lg rounded border-0 mt-4" style="margin-left: 50px; padding: 24px 40px 32px; width: 400px;">
                     <form method="POST" action="login" class="card-body">
                         @csrf
@@ -18,11 +23,11 @@
                         <p class="card-text text-center mb-5">Belum punya akun? <a href="register">Daftar</a></p>
                         <div class="mb-3">
                             <label for="email-input" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email-input" placeholder="name@example.com">
+                            <input type="email" name="email" class="form-control" id="email-input" placeholder="name@example.com">
                         </div>
                         <div class="mb-4">
                             <label for="password-input" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password-input">
+                            <input type="password" name="password" class="form-control" id="password-input">
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary">Masuk</button>

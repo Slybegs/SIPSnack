@@ -11,12 +11,6 @@
                 </div>
             </div>
             <div class="col-6">
-
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-           </ul>
                 <div class="card px-5 bg-white shadow-lg rounded border-0" style="margin-left: 50px; padding: 24px 40px 32px; width: 400px;">
                     <form method="POST" action="register" class="card-body">
                         @csrf

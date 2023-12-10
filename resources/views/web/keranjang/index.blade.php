@@ -1,7 +1,7 @@
 @extends('web.layouts.app')
 
 @section('content')
-<section class="my-5">
+<section class="my-3">
     <div class="container">
       <div class="row">
         <!-- cart -->
@@ -16,7 +16,7 @@
                       <img src="{{ asset('storage/'.$keranjang->produk->gambar) }}" class="border rounded" style="width: 72px; height: 72px;">
                       <div class="ms-3">
                         <a href="{{ route('produk.show', ['produk' => $keranjang->produk->id ]) }}" class="nav-link mb-1">{{ $keranjang->produk->nama }}</a>
-                        <text class="h6">IDR {{ number_format($keranjang->produk->harga_jual) }}</text>
+                        <text class="h6">Rp{{ number_format($keranjang->produk->harga_jual) }}</text>
                       </div>
                     </div>
                 </div>
@@ -58,11 +58,11 @@
               <hr> -->
               <div class="d-flex justify-content-between">
                 <p class="mb-2">Total Harga</p>
-                <p class="mb-2 fw-bold">IDR <span class="total-price"></span></p>
+                <p class="mb-2 fw-bold">Rp<span class="total-price"></span></p>
               </div>
   
               <div class="mt-3">
-                <a href="#" class="btn btn-primary w-100 shadow-0 mb-2"> Beli </a>
+                <a href="{{ route('transaksi.create') }}" class="btn btn-primary w-100 shadow-0 mb-2"> Beli </a>
               </div>
             </div>
           </div>

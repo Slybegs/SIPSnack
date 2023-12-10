@@ -12,7 +12,7 @@
     @vite(['resources/sass/app.scss','resources/js/app.js',])
   @show
     </head>
-    <body>
+    <body class="bg-white">
      @include('web.layouts.toast')
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">

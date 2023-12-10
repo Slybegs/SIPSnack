@@ -14,17 +14,21 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->string('produkID')->nullable();
+            $table->bigInteger('userID')->nullable();
+            $table->bigInteger('bankID')->nullable();
             $table->string('nomorTransaksi')->nullable();
+            $table->date('tanggal')->nullable();
             $table->string('noResi')->nullable();
             $table->string('kurir')->nullable();
             $table->float('ongkir')->nullable();
             $table->float('total')->nullable();
+            $table->float('totalHPP')->nullable();
             $table->string('status')->default('Pending');
-            $table->date('date')->nullable();
-            $table->text('address')->nullable();
-            });
+            $table->string('namaPenerima')->nullable();
+            $table->string('noHandphonePenerima')->nullable();
+            $table->text('alamatPenerima')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

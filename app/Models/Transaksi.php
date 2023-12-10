@@ -25,7 +25,19 @@ class Transaksi extends Model
      *
      * @var array
      */
-    protected $fillable = ['produkID', 'nomorTransaksi', 'noResi', 'kurir', 'ongkir', 'total', 'status', 'date', 'address'];
+    protected $fillable = [ 'userID', 'bankID', 'nomorTransaksi', 'tanggal', 'noResi', 'kurir', 'ongkir', 'total', 'totalHPP', 'status', 'namaPenerima', 'noHandphonePenerima', 'alamatPenerima'];
 
-    
+    protected $casts = [
+        'tanggal' => 'date',
+    ];
+
+    public function detail()
+    {
+        return $this->hasMany(DetailTransaksi::class, 'transaksiID');
+    }
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class, 'bankID');
+    }
 }
