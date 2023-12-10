@@ -9,7 +9,7 @@
           <div class="card border bg-white shadow-0">
             <div class="m-4">
               <h4 class="card-title mb-4">Your shopping cart</h4>
-              @foreach($keranjangs as $keranjang)
+              @forelse($keranjangs as $keranjang)
               <div class="row gy-3 cart-data @if (!$loop->last) mb-4 border-bottom @endif" data-keranjang-id="{{ $keranjang->id }}" data-harga="{{ $keranjang->produk->harga_jual + 0}}">
                 <div class="col-lg-12">
                     <div class="d-flex">
@@ -38,7 +38,9 @@
                     </div>
                 </div>
               </div>
-              @endforeach
+              @empty
+                <p class="text-muted text-center">Tidak ada belanjaan</p>
+              @endforelse
             </div>
   
           </div>
@@ -62,7 +64,11 @@
               </div>
   
               <div class="mt-3">
-                <a href="{{ route('transaksi.create') }}" class="btn btn-primary w-100 shadow-0 mb-2"> Beli </a>
+                @if (count($keranjangs) > 0)
+                  <a href="{{ route('transaksi.create') }}" class="btn btn-primary w-100 shadow-0 mb-2" disabled> Beli </a>
+                @else
+                  <button class="btn btn-primary w-100 shadow-0 mb-2" disabled>Beli</button>
+                @endif
               </div>
             </div>
           </div>
