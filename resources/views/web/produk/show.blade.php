@@ -15,7 +15,7 @@
             {{ $produk->nama }}
           </h4>
           <div class="d-flex flex-row my-3">
-            <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 terjual</span>
+            <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>{{ $produk->totalTerjual() }} terjual</span>
             <span class="text-success ms-2">In stock</span>
           </div>
   
@@ -76,100 +76,20 @@
 
         <div class="row">
             <!-- product grid -->
-            <div class="col-6 col-md-3 mb-3">
-                <div class="bg-white p-3 rounded">
-                    <div class="product-image">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-    
-                    </div>
-                    <div class="product-name">Potabee</div>
-                    <div class="product-price">Rp50.000</div>
-                    <div class="product-info">Terjual 1000+</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-                <div class="bg-white p-3 rounded">
-                    <div class="product-image">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-    
-                    </div>
-                    <div class="product-name">Potabee</div>
-                    <div class="product-price">Rp50.000</div>
-                    <div class="product-info">Terjual 1000+</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-                <div class="bg-white p-3 rounded">
-                    <div class="product-image">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-    
-                    </div>
-                    <div class="product-name">Potabee</div>
-                    <div class="product-price">Rp50.000</div>
-                    <div class="product-info">Terjual 1000+</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-                <div class="bg-white p-3 rounded">
-                    <div class="product-image">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-    
-                    </div>
-                    <div class="product-name">Potabee</div>
-                    <div class="product-price">Rp50.000</div>
-                    <div class="product-info">Terjual 1000+</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-                <div class="bg-white p-3 rounded">
-                    <div class="product-image">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-    
-                    </div>
-                    <div class="product-name">Potabee</div>
-                    <div class="product-price">Rp50.000</div>
-                    <div class="product-info">Terjual 1000+</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-                <div class="bg-white p-3 rounded">
-                    <div class="product-image">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-    
-                    </div>
-                    <div class="product-name">Potabee</div>
-                    <div class="product-price">Rp50.000</div>
-                    <div class="product-info">Terjual 1000+</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-                <div class="bg-white p-3 rounded">
-                    <div class="product-image">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-    
-                    </div>
-                    <div class="product-name">Potabee</div>
-                    <div class="product-price">Rp50.000</div>
-                    <div class="product-info">Terjual 1000+</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-                <div class="bg-white p-3 rounded">
-                    <div class="product-image">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-    
-                    </div>
-                    <div class="product-name">Potabee</div>
-                    <div class="product-price">Rp50.000</div>
-                    <div class="product-info">Terjual 1000+</div>
-                </div>
-            </div>
+            @foreach($randomProduk as $product)
+                <div class="col-12 col-md-3 mb-3">
+                    <a href="#" class="product-data">
+                        <div class="product-image">
+                            <img src="{{ asset('storage/'. $product->gambar)}}" height="140">
         
-        </div>
-    </div>
-    <div class="row">
-        <div class="view col-12 col-md-12 text-center">
-            <a class="view-more" href="#">view more &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-name">{{ $product->nama }}</div>
+                        <div class="product-price">Rp{{ number_format($product->harga_jual) }}</div>
+                        <div class="product-info">Terjual {{ $product->total }}</div>
+                    </a>
+                </div>
+            @endforeach
+        
         </div>
     </div>
     </section>
