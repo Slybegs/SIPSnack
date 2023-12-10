@@ -27,5 +27,13 @@ class Produk extends Model
      */
     protected $fillable = ['produkID', 'nama', 'kategori', 'harga_beli', 'harga_jual', 'deskripsi', 'expired', 'berat'];
 
-    
+    public function detail()
+    {
+        return $this->hasMany(DetailTransaksi::class, 'produkID');
+    }
+
+    public function totalTerjual()
+    {
+        return $this->detail()->sum('quantity');
+    }
 }

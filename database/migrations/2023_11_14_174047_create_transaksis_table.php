@@ -20,7 +20,6 @@ class CreateTransaksisTable extends Migration
             $table->date('tanggal')->nullable();
             $table->string('noResi')->nullable();
             $table->string('kurir')->nullable();
-            $table->float('ongkir')->nullable();
             $table->float('total')->nullable();
             $table->float('totalHPP')->nullable();
             $table->string('status')->default('Pending');

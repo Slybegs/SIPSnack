@@ -12,10 +12,9 @@ class CreateProduksTable extends Migration
      */
     public function up()
     {
-        Schema::create('produks', function (Blueprint $table) {
+        Schema::create('produks', function (Illuminate\Database\Schema\Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->string('produkID')->nullable();
+            $table->string('kode')->nullable();
             $table->string('nama')->nullable();
             $table->string('kategori')->nullable();
             $table->decimal('harga_beli')->nullable();
@@ -23,7 +22,9 @@ class CreateProduksTable extends Migration
             $table->text('deskripsi')->nullable();
             $table->string('expired')->nullable();
             $table->integer('berat')->nullable();
+            $table->integer('stok')->default(0);
             $table->string('gambar')->nullable();
+            $table->timestamps();
         });
     }
 

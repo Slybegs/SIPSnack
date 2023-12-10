@@ -1,7 +1,7 @@
-<div class="form-group {{ $errors->has('produkID') ? 'has-error' : ''}}">
-    <label for="produkID" class="control-label">{{ 'Produkid' }}</label>
-    <input class="form-control" name="produkID" type="text" id="produkID" value="{{ isset($produk->produkID) ? $produk->produkID : ''}}" >
-    {!! $errors->first('produkID', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('kode') ? 'has-error' : ''}}">
+    <label for="kode" class="control-label">{{ 'Kode' }}</label>
+    <input class="form-control" name="kode" type="text" id="kode" value="{{ isset($produk->kode) ? $produk->kode : ''}}" >
+    {!! $errors->first('kode', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('nama') ? 'has-error' : ''}}">
     <label for="nama" class="control-label">{{ 'Nama' }}</label>
@@ -37,6 +37,11 @@
     <label for="berat" class="control-label">{{ 'Berat' }}</label>
     <input class="form-control" name="berat" type="number" id="berat" value="{{ isset($produk->berat) ? $produk->berat : ''}}" >
     {!! $errors->first('berat', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('stok') ? 'has-error' : ''}}">
+    <label for="stok" class="control-label">{{ 'Stok' }}</label>
+    <input class="form-control" name="stok" type="number" id="stok" value="{{ isset($produk->stok) ? $produk->stok : ''}}" >
+    {!! $errors->first('stok', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('gambar') ? 'has-error' : ''}}">
     <label for="gambar" class="control-label">{{ 'Gambar' }}</label>
