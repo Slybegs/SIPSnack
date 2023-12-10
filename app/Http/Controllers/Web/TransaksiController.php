@@ -70,10 +70,14 @@ class TransaksiController extends Controller
 
     public function confirmPayment(Request $request, Transaksi $transaksi)
     {
-        $transaksi->status = 'Menunggu Pengecekan';
-        $transaksi->save();
-
-        session()->flash('success', 'Terima kasih! kami akan segera mengecek pembayaran dan melakukan pengiriman');
+        if ($transaksi->status !== 'Menunggu Pembayaran') {
+            session()->flash('failure', 'Transaksi sedang diproses');
+        } else {
+            $transaksi->status = 'Menunggu Pengecekan';
+            $transaksi->save();
+    
+            session()->flash('success', 'Terima kasih! kami akan segera mengecek pembayaran dan melakukan pengiriman');
+        }
         return redirect()->route('transaksi.show', ['transaksi' => $transaksi]);
     }
 
