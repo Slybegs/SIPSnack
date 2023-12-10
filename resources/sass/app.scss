@@ -252,6 +252,73 @@ button.navbar-toggle {
     }
 }
 
+#payment-method-modal {
+  .payment-method-group-card, .payment-method-group-card .card-header, .payment-method-group-card .card-body{
+    border: none;
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .payment-method-card {
+      height: 48px;
+      margin-bottom: 1rem;
+  }
+
+  input[type="radio"]{
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: white;
+      height: 100%;
+      width: 100%;
+      border-radius: 10px;
+      position: absolute;
+      cursor: pointer;
+      outline: none;
+  }
+  input[type="radio"]:before{
+      content: "";
+      position: absolute;
+      height: 1rem;
+      width: 1rem;
+      background-color: #FFFFFF;
+      border: 1px solid #848484;
+      border-radius: 50%;
+      top: 16px;
+      right: 20px;
+  }
+  input[type="radio"]:after{
+      content: "";
+      position: absolute;
+      height: 0.5rem;
+      width: 0.5rem;
+      background-color: transparent;
+      border-radius: 50%;
+      top: 20px;
+      right: 24px;
+  }
+
+  input[type="radio"]:checked:after{
+      background-color: #848484;
+  }
+
+  label{
+      margin: 0.5rem 1rem;
+      cursor: pointer;
+      z-index: 999;
+  }
+  .summary-header {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .summary-price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-left: auto;
+  }
+}
+
 .toast-container {
   position: fixed;
   top: 40px;
@@ -268,18 +335,24 @@ button.navbar-toggle {
       }
   }
 }
+.status {
+  border-radius: 1.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
 
-.toast-warning {
+.status-warning, .toast-warning {
   color: #F89F37;
   background: #FFF6EC;
 }
 
-.toast-success {
+.status-success, .toast-success {
   color: #1ECB44;
   background: #EEFFF2;
 }
 
-.toast-danger {
+.status-danger, .toast-danger {
   color: #E25C5C;
   background: #FFEEEE;
 }
