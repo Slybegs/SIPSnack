@@ -29,7 +29,7 @@ class BankController extends Controller
             $bank = Bank::latest()->paginate($perPage);
         }
 
-        return view('bank.bank.index', compact('bank'));
+        return view('admin.bank.index', compact('bank'));
     }
 
     /**
@@ -39,7 +39,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('bank.bank.create');
+        return view('admin.bank.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class BankController extends Controller
         
         Bank::create($requestData);
 
-        return redirect('bank/bank')->with('flash_message', 'Bank added!');
+        return redirect()->route('admin.bank.index')->with('flash_message', 'Bank added!');
     }
 
     /**
@@ -70,7 +70,7 @@ class BankController extends Controller
     {
         $bank = Bank::findOrFail($id);
 
-        return view('bank.bank.show', compact('bank'));
+        return view('admin.bank.show', compact('bank'));
     }
 
     /**
@@ -84,7 +84,7 @@ class BankController extends Controller
     {
         $bank = Bank::findOrFail($id);
 
-        return view('bank.bank.edit', compact('bank'));
+        return view('admin.bank.edit', compact('bank'));
     }
 
     /**
@@ -103,7 +103,7 @@ class BankController extends Controller
         $bank = Bank::findOrFail($id);
         $bank->update($requestData);
 
-        return redirect('bank/bank')->with('flash_message', 'Bank updated!');
+        return redirect()->route('admin.bank.index')->with('flash_message', 'Bank updated!');
     }
 
     /**
@@ -117,6 +117,6 @@ class BankController extends Controller
     {
         Bank::destroy($id);
 
-        return redirect('bank/bank')->with('flash_message', 'Bank deleted!');
+        return redirect()->route('admin.bank.index')->with('flash_message', 'Bank deleted!');
     }
 }

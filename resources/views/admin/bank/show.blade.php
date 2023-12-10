@@ -4,13 +4,13 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-9">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header">Bank</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/bank/bank') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/bank/bank/' . $bank->id . '/edit') }}" title="Edit Bank"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                        <a href="{{ route('admin.bank.index') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ route('admin.bank.edit', ['bank' => $bank->id]) }}" title="Edit Bank"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
                         <form method="POST" action="{{ url('bank/bank' . '/' . $bank->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}

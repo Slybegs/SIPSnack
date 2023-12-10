@@ -35,8 +35,6 @@ class KeranjangController extends Controller
             $keranjang->fill($requestData);
             $keranjang->save();
         }
-
-
     }
 
     public function destroy($id)

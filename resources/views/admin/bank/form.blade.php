@@ -1,6 +1,10 @@
 <div class="form-group {{ $errors->has('namaBank') ? 'has-error' : ''}}">
     <label for="namaBank" class="control-label">{{ 'Nama bank' }}</label>
-    <input class="form-control" name="namaBank" type="text" id="namaBank" value="{{ isset($bank->namaBank) ? $bank->namaBank : ''}}" >
+    <select class="custom-select" name="namaBank">
+        <option value="BCA" {{ isset($bank->namaBank) ? ($bank->namaBank == 'BCA' ? 'selected' : '') : ''}}>BCA</option>
+        <option value="MANDIRI" {{ isset($bank->namaBank) ? ($bank->namaBank == 'MANDIRI' ? 'selected' : '') : ''}}>Mandiri</option>
+        <option value="BRI" {{ isset($bank->namaBank) ? ($bank->namaBank == 'BRI' ? 'selected' : '') : ''}}>BRI</option>
+      </select>
     {!! $errors->first('namaBank', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('noRek') ? 'has-error' : ''}}">
@@ -10,7 +14,7 @@
 </div>
 <div class="form-group {{ $errors->has('namaRek') ? 'has-error' : ''}}">
     <label for="namaRek" class="control-label">{{ 'Nama rek' }}</label>
-    <textarea class="form-control" rows="5" name="namaRek" type="textarea" id="namaRek" >{{ isset($bank->namaRek) ? $bank->namaRek : ''}}</textarea>
+    <input class="form-control" name="namaRek" type="text" id="namaRek" value="{{ isset($bank->namaRek) ? $bank->namaRek : ''}}">
     {!! $errors->first('namaRek', '<p class="help-block">:message</p>') !!}
 </div>
 

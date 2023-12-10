@@ -36,19 +36,19 @@
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    @include('layouts.navbar')
+    @include('admin.layouts.navbar')
   </nav>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    @include('layouts.sidebar')
+    @include('admin.layouts.sidebar')
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper pt-4">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    {{-- <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -62,7 +62,7 @@
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
-    </div>
+    </div> --}}
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -70,15 +70,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">@yield('title')</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
                   @yield('content')
-              </div>
-            </div>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -87,7 +79,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    @include('layouts.footer')
+    @include('admin.layouts.footer')
   </footer>
 
   <!-- Control Sidebar -->

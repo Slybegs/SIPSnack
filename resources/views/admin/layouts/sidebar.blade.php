@@ -13,11 +13,7 @@
           </div>
           <div class="info">
             <a href="#" class="d-block">
-              {{-- @guest
-              @else
-              {{ Auth::user()->name }}
-              @endguest --}}
-              Piere
+              {{ auth()->user()->name }}
             </a>
           </div>
         </div>
@@ -39,51 +35,24 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-            {{-- @guest
-              @if (Route::has('login'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-              @endif
-
-              @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-              @endif
-
-            @else --}}
             <li class="nav-item">
-                <a href="/produk/produk" class="nav-link">
-                  <i class="nav-icon fas fa-university"></i>
+                <a href="{{ route('admin.produk.index')}}" class="nav-link">
+                  <i class="nav-icon fas fa-inventory"></i>
                   <p>Produk</p>
                 </a>
             </li>
             <li class="nav-item">
-              <a href="/transaksi/transaksi" class="nav-link">
-                <i class="nav-icon fas fa-university"></i>
+              <a href="{{ route('admin.transaksi.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-receipt"></i>
                 <p>Transaksi</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/bank/bank" class="nav-link">
-                <i class="nav-icon fas fa-university"></i>
+              <a href="{{ route('admin.bank.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-cash-register"></i>
                 <p>Bank</p>
               </a>
           </li>
-            {{-- <li class="nav-item">
-              <a class="nav-link" href="{{ route('logout') }}"
-              onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-heart"></i>
-              <p>{{ __('Logout') }}</p> 
-              </a>
-
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                  @csrf
-              </form>
-            </li> --}}
-          {{-- @endguest --}}
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
