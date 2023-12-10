@@ -21,8 +21,8 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="nosubmit me-auto">
-                <input type="text" class="form-control nosubmit" placeholder="Search...">
+            <form class="nosubmit me-auto" action="{{ route('produk.index') }}" method="GET">
+                <input type="text" class="form-control nosubmit" name="search" placeholder="Search...">
               </form>
             <ul class="navbar-nav mb-2 mb-lg-0">
               @guest('web')

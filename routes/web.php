@@ -30,6 +30,7 @@ Route::post('register', [RegisterController::class, 'register']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('produk', [ProdukController::class, 'index'])->name('produk.index');
 Route::get('produk/{produk}', [ProdukController::class, 'show'])->name('produk.show');
 
 Route::group(['middleware' => 'auth:web'], function () {
