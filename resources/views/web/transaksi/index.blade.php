@@ -36,9 +36,7 @@
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-between">
                             <p class="text-muted small"><i class="fa-regular fa-fw fa-calendar me-1"></i>{{ $transaksi->tanggal->format('d M Y') }}  |  {{ $transaksi->nomorTransaksi }}</p> 
-                            <div class="status status-warning">
-                                Menunggu Pembayaran
-                            </div>
+                            @include('web.layouts.status', ['status' => $transaksi->status])
                         </div>
                         <div class="col-12 col-md-8">
                             <div class="d-flex">

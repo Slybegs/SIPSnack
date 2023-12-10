@@ -29,28 +29,30 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Produk ID</th><th>Nomor Transaksi</th><th>No Resi</th><th>Kurir</th><th>Ongkir</th><th>Total</th><th>Status</th><th>Date</th><th>Address</th><th>Actions</th>
+                                        <th>Tanggal</th><th>Nomor Transaksi</th><th>Metode Pembayaran</th><th>Total</th><th>Status</th><th>Address</th><th>No Resi</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($transaksi as $item)
                                     <tr>
-                                        <td>{{ $item->produkID }}</td><td>{{ $item->nomorTransaksi }}</td><td>{{ $item->noResi }}</td><td>{{ $item->kurir }}</td><td>{{ $item->ongkir }}</td><td>{{ $item->total }}</td><td>{{ $item->status }}</td><td>{{ $item->date }}</td><td>{{ $item->address }}</td>
+                                        <td>{{ $item->tanggal->format('d M Y')}}</td>
+                                        <td>{{ $item->nomorTransaksi }}</td><td>{{ $item->bank->namaBank }}</td><td>{{ number_format($item->total) }}</td><td>{{ $item->status }}</td><td>{{ $item->alamatPenerima }}</td><td>{{ $item->kurir . ' - ' . $item->noResi }}</td>
                                         <td>
-                                            <a href="{{ url('/transaksi/transaksi/' . $item->id) }}" title="View Transaksi"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            {{-- <a href="{{ url('/transaksi/transaksi/' . $item->id . '/edit') }}" title="Edit Transaksi"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a> --}}
+                                            <a href="{{ route('admin.transaksi.show', ['transaksi' => $item->id]) }}" title="View Transaksi"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            {{-- <a href="{{ route('admin.transaksi.show/, ['transaksi' => $item->id]' . $item->id . '/edit') }}" title="Edit Transaksi"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a> --}}
+                                            
+                                            @if ($item->status === 'Menunggu Pengecekan')
+                                                <form method="POST" action="{{ route('admin.transaksi.confirmPayment', ['transaksi' => $item->id]) }}" accept-charset="UTF-8" style="display:inline">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-info btn-sm" title="Konfirmasi Transaksi" onclick="return confirm(&quot;Konfirmasi pembayaran?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Confirm</button>
+                                                </form> 
+                                            @endif
 
-                                            <form method="POST" action="{{ url('/transaksi/transaksi' . '/' . $item->id) }}/confirm-status" accept-charset="UTF-8" style="display:inline">
-                                                {{ csrf_field() }}
-                                                {{ method_field('PATCH') }}
-                                                <button type="submit" class="btn btn-info btn-sm" title="Konfirmasi Transaksi" onclick="return confirm(&quot;Confirm transaction?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Confirm</button>
-                                            </form> 
-
-                                            {{-- <form method="POST" action="{{ url('/transaksi/transaksi' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Transaksi" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                            </form>  --}}
+                                            @if ($item->status === 'Diproses')
+                                                <button type="button" class="btn btn-sm btn-default btn-input-resi" data-toggle="modal" data-target="#modal-default" data-update-url="{{ route('admin.transaksi.updateDelivery', ['transaksi' => $item->id]) }}">
+                                                    Input Resi
+                                                </button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -64,4 +66,41 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Input Resi Pengiriman</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="update-resi-form" method="POST">
+                        {{ method_field('PATCH') }}
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="noResi" class="control-label">{{ 'Noresi' }}</label>
+                            <input class="form-control" name="noResi" type="text" id="noResi">
+                        </div>
+                        <div class="form-group">
+                            <label for="kurir" class="control-label">{{ 'Kurir' }}</label>
+                            <input class="form-control" name="kurir" type="text" id="kurir">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button form="update-resi-form" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+@push('scripts')
+<script>
+    $('.btn-input-resi').click(function(){
+        $('#update-resi-form').attr('action', $(this).data('updateUrl'));
+    });
+</script>
+@endpush

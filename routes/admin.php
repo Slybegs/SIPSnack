@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:admin_web'], function () {
     
     Route::resource('transaksi', TransaksiController::class);
     
-    Route::patch('transaksi/{id}/confirm-status',[TransaksiController::class, 'confirmStatus']);
+    Route::post('transaksi/{transaksi}/confirm-payment',[TransaksiController::class, 'confirmPayment'])->name('transaksi.confirmPayment');
+    Route::patch('transaksi/{transaksi}/update-delivery',[TransaksiController::class, 'updateDeliveryData'])->name('transaksi.updateDelivery');
 
 });

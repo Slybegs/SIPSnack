@@ -13,7 +13,7 @@ class TransaksiController extends Controller
 {
     public function index()
     {
-        $transaksis = Transaksi::where('userID', auth()->id())->get();
+        $transaksis = Transaksi::latest()->where('userID', auth()->id())->get();
         return view('web.transaksi.index')->with(compact('transaksis'));
     }
     
@@ -51,6 +51,10 @@ class TransaksiController extends Controller
             $detail->subtotal_hpp = $subtotalHPP;
             $detail->save();
 
+            $produk = $detail->produk;
+            $produk->stok -= $detail->quantity;
+            $produk->save();
+
             $totalHarga += $subtotal;
             $totalHPP += $subtotalHPP;
             $keranjang->delete();
@@ -60,7 +64,7 @@ class TransaksiController extends Controller
         $transaksi->save();
 
         session()->flash('success', 'Transaksi berhasil dibuat');
-        return redirect()->route('home');
+        return redirect()->route('transaksi.show', ['transaksi' => $transaksi->id]);
     }
     
     public function show(Request $request, Transaksi $transaksi)

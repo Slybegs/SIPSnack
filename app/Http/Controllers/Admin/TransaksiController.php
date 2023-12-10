@@ -21,21 +21,19 @@ class TransaksiController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $transaksi = Transaksi::where('produkID', 'LIKE', "%$keyword%")
-                ->orWhere('nomorTransaksi', 'LIKE', "%$keyword%")
+            $transaksi = Transaksi::where('nomorTransaksi', 'LIKE', "%$keyword%")
                 ->orWhere('noResi', 'LIKE', "%$keyword%")
                 ->orWhere('kurir', 'LIKE', "%$keyword%")
-                ->orWhere('ongkir', 'LIKE', "%$keyword%")
                 ->orWhere('total', 'LIKE', "%$keyword%")
                 ->orWhere('status', 'LIKE', "%$keyword%")
-                ->orWhere('date', 'LIKE', "%$keyword%")
-                ->orWhere('address', 'LIKE', "%$keyword%")
+                ->orWhere('tanggal', 'LIKE', "%$keyword%")
+                ->orWhere('alamatPengirim', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
             $transaksi = Transaksi::latest()->paginate($perPage);
         }
 
-        return view('transaksi.transaksi.index', compact('transaksi'));
+        return view('admin.transaksi.index', compact('transaksi'));
     }
 
     /**
@@ -45,7 +43,7 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        return view('transaksi.transaksi.create');
+        return view('admin.transaksi.create');
     }
 
     /**
@@ -62,7 +60,7 @@ class TransaksiController extends Controller
         
         Transaksi::create($requestData);
 
-        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi added!');
+        return redirect()->route('admin.transaksi.index')->with('flash_message', 'Transaksi added!');
     }
 
     /**
@@ -76,7 +74,7 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::findOrFail($id);
 
-        return view('transaksi.transaksi.show', compact('transaksi'));
+        return view('admin.transaksi.show', compact('transaksi'));
     }
 
     /**
@@ -90,7 +88,7 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::findOrFail($id);
 
-        return view('transaksi.transaksi.edit', compact('transaksi'));
+        return view('admin.transaksi.edit', compact('transaksi'));
     }
 
     /**
@@ -101,38 +99,29 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function confirmStatus(Request $request, $id)
+    public function confirmPayment(Request $request, Transaksi $transaksi)
     {
-        
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->update(['status' => 'Pengiriman']);
+        $transaksi->update(['status' => 'Diproses']);
 
-        return redirect('transaksi/transaksi')->with('flash_message', 'Status berhasil diperbarui!');
+        return redirect()->route('admin.transaksi.index')->with('flash_message', 'Status berhasil diperbarui!');
+    }
+
+    public function updateDeliveryData(Request $request, Transaksi $transaksi)
+    {
+        $requestData = $request->only('noResi', 'kurir');
+        $requestData['status'] = 'Dikirim';
+        $transaksi->update($requestData);
+
+        return redirect()->route('admin.transaksi.index')->with('flash_message', 'No Resi telah diperbarui!');
     }
 
     public function update(Request $request, $id)
     {
-        
         $requestData = $request->all();
         
         $transaksi = Transaksi::findOrFail($id);
         $transaksi->update($requestData);
-        print("LOL");
 
-        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi updated!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function destroy($id)
-    {
-        Transaksi::destroy($id);
-
-        return redirect('transaksi/transaksi')->with('flash_message', 'Transaksi deleted!');
+        return redirect()->route('admin.transaksi.index')->with('flash_message', 'Transaksi updated!');
     }
 }

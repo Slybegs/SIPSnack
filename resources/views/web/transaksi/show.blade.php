@@ -13,9 +13,7 @@
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-between">
                             <p class="text-muted small"><i class="fa-regular fa-fw fa-calendar me-1"></i>{{ $transaksi->tanggal->format('d M Y') }}  |  {{ $transaksi->nomorTransaksi }}</p> 
-                            <div class="status status-warning">
-                                {{ $transaksi->status}}
-                            </div>
+                            @include('web.layouts.status', ['status' => $transaksi->status])
                         </div>
 
                         @if ($transaksi->status === 'Menunggu Pembayaran')
@@ -36,14 +34,37 @@
                             <button class="btn btn-outline-dark ms-auto" >Copy</button>
                         </div>
                         @elseif ($transaksi->status == 'Menunggu Pengecekan')
-                        <div class="px-3 my-3">
+                        <div class="px-3 mt-3">
                             <div class="alert alert-warning">
                                 <i class="fa fa-fw fa-warning"></i>
                                 Kami sedang mengecek pembayaran anda
                             </div>
                         </div>
                         @endif
-                        <h6 class="mb-3">Detail Produk</h6>
+                        <h6 class="my-3 text-muted">Info Pengiriman</h6>
+                        @if ($transaksi->status === 'Dikirim')
+                            <div class="d-flex justify-content-between">
+                                <p class="text-muted">Kurir</p>    
+                                <p class="fw-bold">{{ $transaksi->kurir }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="text-muted">No Resi</p>    
+                                <p class="fw-bold">{{ $transaksi->noResi }}</p>
+                            </div>
+                        @endif
+                        <div class="d-flex justify-content-between">
+                            <p class="text-muted">Nama Penerima</p>    
+                            <p class="fw-bold">{{ $transaksi->namaPenerima }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="text-muted">No Handphone Penerima</p>    
+                            <p class="fw-bold">{{ $transaksi->noHandphonePenerima }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="text-muted">Alamat Penerima</p>    
+                            <p class="fw-bold">{{ $transaksi->alamatPenerima }}</p>
+                        </div>
+                        <h6 class="my-3">Detail Produk</h6>
                         @foreach($transaksi->detail as $detail)
                         <div class="col-12 col-md-8">
                             <div class="d-flex">
@@ -85,6 +106,15 @@
                                 <p class="text-muted">Total Belanja</p>
                                 <h6>Rp {{number_format($transaksi->total)}}</h6>  
                             </div>
+                            @if ($transaksi->status === 'Dikirim')
+
+                            <div class="col-12 mt-3 d-flex">
+                                <form method="POST" action="{{ route('transaksi.confirmDelivery', ['transaksi' => $transaksi->id ])}}">
+                                    @csrf
+                                    <button class="btn btn-primary">Belanjaan sudah sampai!</button>
+                                </form>
+                            </div>
+                            @endif
                         @endif
                     </div>
                 </div>
