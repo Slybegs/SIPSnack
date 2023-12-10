@@ -15,7 +15,7 @@
                         {{ $product->nama }}
                       </div>
                       <div class="product-price">
-                      IDR {{ number_format($product->harga_jual) }}
+                      Rp{{ number_format($product->harga_jual) }}
                       </div>
                     </div>
                 </a>
@@ -29,106 +29,58 @@
         <div class="container" id="main">
             <div class="row">
                 <div class="col-12">
+                    <h5 class="section-title mb-3">Kategori</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                @php 
+                    $backgrounds = [
+                        'step-bg',
+                        'wavy-bg',
+                        'cross-bg',
+                        'diagonal-bg'
+                    ];
+                @endphp
+                @foreach ($categories as $category)
+                <div class="col-6 col-md-3">
+                    <a href="#" class="card {{ $backgrounds[$loop->index % 4]}}">
+                        <div class="card-body">
+                            <div class="card-title text-center my-2 text-white fw-bold">
+                                {{$category['kategori']}}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            
+            </div>
+        </div>
+    </section>
+    <section id="popular-product-section">
+        <div class="container" id="main">
+            <div class="row">
+                <div class="col-12">
                     <h5 class="section-title">Popular Products</h5>
                 </div>
             </div>
 
             <div class="row">
-                <!-- product grid -->
-                <div class="col-6 col-md-3 mb-3">
+                @foreach($popularProduct as $product)
+                <div class="col-12 col-md-3 mb-3">
                     <a href="#" class="product-data">
                         <div class="product-image">
-                            <img src="https://www.cheetos.com/sites/cheetos.com/files/2019-02/Cheetos%20Crunchy%20Flamin%27%20Hot_1.png" class="img-fluid">
+                            <img src="{{ asset('storage/'. $product->gambar)}}" height="140">
         
                         </div>
-                        <div class="product-name">Cheetoz Flamin' Hot</div>
-                        <div class="product-price">IDR 50.000</div>
-                        <div class="product-info">Terjual 1000+</div>
+                        <div class="product-name">{{ $product->nama }}</div>
+                        <div class="product-price">Rp{{ number_format($product->harga_jual) }}</div>
+                        <div class="product-info">Terjual {{ $product->total }}</div>
                     </a>
                 </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <a href="#" class="product-data">
-                        <div class="product-image">
-                            <img src="https://mamee.com/wp-content/uploads/2023/10/corntoz-left-img-new.png" class="img-fluid">
-        
-                        </div>
-                        <div class="product-name">Potabee</div>
-                        <div class="product-price">IDR 50.000</div>
-                        <div class="product-info">Terjual 1000+</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <a href="#" class="product-data">
-                        <div class="product-image">
-                            <img src="https://images.kglobalservices.com/www.cheezit.com/en_us/product/product_4821790/prod_img-8235260_optimized_orig_00024100705665_c1l1.png" class="img-fluid">
-        
-                        </div>
-                        <div class="product-name">Potabee</div>
-                        <div class="product-price">IDR 50.000</div>
-                        <div class="product-info">Terjual 1000+</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <a href="#" class="product-data">
-                        <div class="product-image">
-                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-        
-                        </div>
-                        <div class="product-name">Potabee</div>
-                        <div class="product-price">IDR 50.000</div>
-                        <div class="product-info">Terjual 1000+</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <div class="bg-white p-3 rounded">
-                        <div class="product-image">
-                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-        
-                        </div>
-                        <div class="product-name">Potabee</div>
-                        <div class="product-price">IDR 50.000</div>
-                        <div class="product-info">Terjual 1000+</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <div class="bg-white p-3 rounded">
-                        <div class="product-image">
-                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-        
-                        </div>
-                        <div class="product-name">Potabee</div>
-                        <div class="product-price">IDR 50.000</div>
-                        <div class="product-info">Terjual 1000+</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <div class="bg-white p-3 rounded">
-                        <div class="product-image">
-                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-        
-                        </div>
-                        <div class="product-name">Potabee</div>
-                        <div class="product-price">IDR 50.000</div>
-                        <div class="product-info">Terjual 1000+</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <a class="product-data">
-                        <div class="product-image">
-                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//111/MTA-3399996/potabee_pota-bee-65gr-bungkus-grilled-seaweed_full02.jpg" class="img-fluid">
-        
-                        </div>
-                        <div class="product-name">Potabee</div>
-                        <div class="product-price">IDR 50.000</div>
-                        <div class="product-info">Terjual 1000+</div>
-                    </a>
-                </div>
+                @endforeach
+                
             
-            </div>
-        </div>
-        <div class="row">
-            <div class="view col-12 col-md-12 text-center">
-                <a class="view-more" href="#">view more &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
