@@ -116,7 +116,6 @@ class ProdukController extends Controller
             $produk->gambar = $path;
             $oldImage = $produk->getOriginal('gambar');
             $produk->save();
-            Storage::disk('public')->delete($oldImage);
         }
 
         return redirect()->route('admin.produk.index')->with('flash_message', 'Produk updated!');
