@@ -55,7 +55,7 @@
             </li>
             <li class="nav-item">
               <a href="{{ route('admin.sales-report.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-cash-register"></i>
+                <i class="nav-icon fas fa-file"></i>
                 <p>Sales Report</p>
               </a>
             </li>

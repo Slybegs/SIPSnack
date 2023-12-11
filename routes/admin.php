@@ -13,7 +13,7 @@ Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::group(['middleware' => 'auth:admin_web'], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('admin.home');
     })->name('home');
 
     Route::resource('produk', ProdukController::class);
