@@ -14,9 +14,11 @@
     </head>
     <body class="bg-white">
      
-    <nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 shadow-none">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4 shadow-none">
         <div class="container">
-          <a class="navbar-brand mx-auto" href="{{ route('home') }}">SIPSnack</a>
+          <a class="navbar-brand mx-auto" href="{{ route('home') }}">
+            <img src="{{ asset('images/logo.png')}}" width="105" height="35" alt="">
+          </a>
         </div>
       </nav>
     </div>
