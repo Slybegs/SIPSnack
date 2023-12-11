@@ -20,6 +20,10 @@
                 <div class="mt-3">
                   <button type="button" id="btn-choose-payment-method" class="btn btn-primary w-100 shadow-0 mb-2" onclick="new bootstrap.Modal(document.getElementById('profile-modal')).show();"> Edit Profile </button>
                 </div>
+                <form action="{{ url('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-primary w-100 shadow-0 mb-2"> Logout </button>
+                </form>
               </div>
             </div>
           </div>
