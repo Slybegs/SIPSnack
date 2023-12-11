@@ -40,4 +40,9 @@ class Transaksi extends Model
     {
         return $this->belongsTo(Bank::class, 'bankID');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userID');
+    }
 }

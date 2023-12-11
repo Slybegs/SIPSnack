@@ -16,7 +16,7 @@
      
     <nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 shadow-none">
         <div class="container">
-          <a class="navbar-brand mx-auto" href="#">SIPSnack</a>
+          <a class="navbar-brand mx-auto" href="{{ route('home') }}">SIPSnack</a>
         </div>
       </nav>
     </div>

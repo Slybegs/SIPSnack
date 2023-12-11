@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\SalesReportController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 
 
@@ -24,4 +25,7 @@ Route::group(['middleware' => 'auth:admin_web'], function () {
     Route::post('transaksi/{transaksi}/confirm-payment',[TransaksiController::class, 'confirmPayment'])->name('transaksi.confirmPayment');
     Route::patch('transaksi/{transaksi}/update-delivery',[TransaksiController::class, 'updateDeliveryData'])->name('transaksi.updateDelivery');
 
+    Route::get('sales-report', [SalesReportController::class, 'index'])->name('sales-report.index');
+    Route::get('sales-report/export', [SalesReportController::class, 'export'])->name('sales-report.export');
+    Route::get('sales-report-detail/export', [SalesReportController::class, 'exportDetail'])->name('sales-report-detail.export');
 });

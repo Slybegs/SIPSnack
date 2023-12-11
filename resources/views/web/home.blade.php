@@ -68,7 +68,7 @@
             <div class="row">
                 @foreach($popularProduct as $product)
                 <div class="col-12 col-md-3 mb-3">
-                    <a href="#" class="product-data">
+                    <a href="{{ route('produk.show', ['produk' => $product->id])}}" class="product-data">
                         <div class="product-image">
                             <img src="{{ asset('storage/'. $product->gambar)}}" height="140">
         

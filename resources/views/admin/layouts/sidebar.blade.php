@@ -52,7 +52,13 @@
                 <i class="nav-icon fas fa-cash-register"></i>
                 <p>Bank</p>
               </a>
-          </li>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('admin.sales-report.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-cash-register"></i>
+                <p>Sales Report</p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

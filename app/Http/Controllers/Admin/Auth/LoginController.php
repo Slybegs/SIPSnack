@@ -20,21 +20,9 @@ class LoginController extends Controller
         return view('admin.auth.login');
     }
  
-    public function logout(Request $request)
+    public function loggedOut(Request $request)
     {
-        $this->guard()->logout();
-
-        $request->session()->flush();
-
-        $request->session()->regenerate();
-
         return redirect(route('admin.login'));
-    }
-
-    protected function attemptLogin(Request $request)
-    {
-        $cred = $this->credentials($request);
-        return $this->guard()->attempt($cred);
     }
 
     protected function guard()
