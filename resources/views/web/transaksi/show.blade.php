@@ -25,13 +25,13 @@
                                     <h6>{{ $transaksi->bank->noRek}}</h6>
                                     <p class="text-muted">{{ $transaksi->bank->namaRek }}</p>
                                 </div>
-                                <button class="btn btn-outline-dark ms-auto" >Copy</button>
+                                <button class="btn btn-copy btn-outline-dark ms-auto" data-copy="{{ $transaksi->bank->noRek }}" data-toast="account-number-toast">Copy</button>
                             </div>
                         </div>
                         <h6 class="mt-3 mb-0">Total Belanja</h6>
                         <div class="d-flex align-items-center">
                             <h5 style="color: #E25C5C">Rp {{number_format($transaksi->total)}}</h5>
-                            <button class="btn btn-outline-dark ms-auto" >Copy</button>
+                            <button class="btn btn-copy btn-outline-dark ms-auto" data-copy="{{ $transaksi->total + 0 }}" data-toast="transfer-amount-toast">Copy</button>
                         </div>
                         @elseif ($transaksi->status == 'Menunggu Pengecekan')
                         <div class="px-3 mt-3">
@@ -81,16 +81,12 @@
                             <a href="{{ route('produk.show', ['produk' => $detail->produk->id])}}" class="btn btn-sm text-primary mt-auto">Lihat Produk</a>
                         </div>
                         @endforeach
-                        {{-- <h6 class="my-3">Info Pengiriman</h6>
-                        <div class="col-12">
-                        </div> --}}
 
                         @if ($transaksi->status === 'Menunggu Pembayaran')
                         <div class="col-12 mt-3 d-flex">
-                            <form method="POST" action="{{ route('transaksi.confirmPayment', ['transaksi' => $transaksi->id ])}}">
-                                @csrf
-                                <button class="btn btn-primary">Konfirmasi Pembayaran</button>
-                            </form>
+                            
+                            <button class="btn btn-primary" onclick="new bootstrap.Modal(document.getElementById('confirm-payment-modal')).show();">Konfirmasi Pembayaran</button>
+
                             <form method="POST" action="{{ route('transaksi.cancel', ['transaksi' => $transaksi->id ])}}">
                                 @csrf
                                 <button class="btn btn-outline-danger ms-1">Batal</button>
@@ -127,4 +123,65 @@
       </div>
     </div>
   </section>
-  @endsection
+  <div id="confirm-payment-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-white">
+            <form method="POST" action="{{ route('transaksi.confirmPayment', ['transaksi' => $transaksi->id ])}}" class="modal-body" enctype="multipart/form-data">
+                {{ method_field('PATCH') }}
+                @csrf
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Bukti Pembayaran</label>
+                            <input class="form-control" name="buktiPembayaran" type="file" id="formFile">
+                            <div id="fileHelp" class="form-text">Upload Bukti Transfer kamu untuk mempercepat proses pengecekan</div>
+                        </div>
+                        <img src="#" alt="Your image" class="img-thumbnail mb-3 mx-auto" width="200" style="display: none; max-height: 240px;">
+                    </div>
+                    <div class="col-12">
+                        <div class="d-grid gap-2">
+                          <button class="btn btn-primary">Konfirmasi Pembayaran</button>
+                          <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Batalkan</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+  
+@section('toast')
+  <div id="account-number-toast" class="toast toast-primary fade hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1000">
+      <div class="toast-body">
+          Nomor Rekening tersalin
+      </div>
+  </div>
+  <div id="transfer-amount-toast" class="toast toast-primary fade hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1000">
+      <div class="toast-body">
+          Jumlah Belanjaan tersalin
+      </div>
+  </div>
+
+
+@endsection
+
+@push('script')
+    <script type="module">
+        $(document).ready(function() {
+            $('.btn-copy').click(function() {
+                console.log('a');
+                navigator.clipboard.writeText($(this).data('copy'));
+                (new bootstrap.Toast($('#' + $(this).data('toast')))).show()
+            });
+        });
+        document.querySelector('#formFile').addEventListener('change',function(e){
+            const [file] = document.getElementById("formFile").files
+            if (file) {
+                var imgNode = e.target.parentNode.nextElementSibling
+                imgNode.src = URL.createObjectURL(file)
+                imgNode.style.display = 'block';
+            }
+        })
+    </script>
+@endpush
