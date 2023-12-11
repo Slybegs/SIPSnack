@@ -16,14 +16,13 @@
     @endif
 </div>
 
-@pushIf(Session::has('success') || Session::has('failure'), 'script')
+@pushIf(Session::has('success'), 'script')
     <script type="module">
-        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-        var toastList = toastElList.map(function(toastEl) {
-        // Creates an array of toasts (it only initializes them)
-          return new bootstrap.Toast(toastEl) // No need for options; use the default options
-        });
-       toastList.forEach(toast => toast.show()); // This show them
-
+        (new bootstrap.Toast($('.toast-success')[0])).show()); // This show them
+    </script>
+@endPushIf
+@pushIf(Session::has('failure'), 'script')
+    <script type="module">
+        (new bootstrap.Toast($('.toast-danger')[0])).show()); // This show them
     </script>
 @endPushIf

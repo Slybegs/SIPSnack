@@ -35,7 +35,7 @@ Route::get('produk/{produk}', [ProdukController::class, 'show'])->name('produk.s
 
 Route::group(['middleware' => 'auth:web'], function () {
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('transaksi/{transaksi}/konfirmasi-pembayaran', [TransaksiController::class, 'confirmPayment'])->name('transaksi.confirmPayment');
+    Route::patch('transaksi/{transaksi}/konfirmasi-pembayaran', [TransaksiController::class, 'confirmPayment'])->name('transaksi.confirmPayment');
     Route::post('transaksi/{transaksi}/konfirmasi-pengiriman', [TransaksiController::class, 'confirmDelivery'])->name('transaksi.confirmDelivery');
     Route::post('transaksi/{transaksi}/batal', [TransaksiController::class, 'cancel'])->name('transaksi.cancel');
     Route::resource('keranjang', KeranjangController::class);

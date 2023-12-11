@@ -10,6 +10,7 @@
                     <div class="card-body">
 
                         <a href="{{ route('admin.transaksi.index') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal-bukti-pembayaran">Bukti Pembayaran</button>
                         @if ($transaksi->status === 'Menunggu Pengecekan')
                             <form method="POST" action="{{ route('admin.transaksi.confirmPayment', ['transaksi' => $transaksi->id]) }}" accept-charset="UTF-8" style="display:inline">
                                 @csrf
@@ -107,6 +108,21 @@
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button form="update-resi-form" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-bukti-pembayaran" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Bukti Pembayaran</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('storage/'.$transaksi->buktiPembayaran)}}" alt="Your image" class="img-thumbnail mb-3 mx-auto">
                 </div>
             </div>
         </div>

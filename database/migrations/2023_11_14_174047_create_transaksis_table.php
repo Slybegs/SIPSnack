@@ -26,6 +26,7 @@ class CreateTransaksisTable extends Migration
             $table->string('namaPenerima')->nullable();
             $table->string('noHandphonePenerima')->nullable();
             $table->text('alamatPenerima')->nullable();
+            $table->string('buktiPembayaran')->nullable();
             $table->timestamps();
         });
     }

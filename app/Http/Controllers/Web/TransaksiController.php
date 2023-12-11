@@ -77,6 +77,10 @@ class TransaksiController extends Controller
         if ($transaksi->status !== 'Menunggu Pembayaran') {
             session()->flash('failure', 'Transaksi sedang diproses');
         } else {
+            if ($request->hasFile('buktiPembayaran')) {
+                $path = $request->file('buktiPembayaran')->store('bukti', 'public');
+                $transaksi->buktiPembayaran = $path;
+            }
             $transaksi->status = 'Menunggu Pengecekan';
             $transaksi->save();
     
