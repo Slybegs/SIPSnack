@@ -10,8 +10,11 @@
         <!-- Navbar Search -->
         
         <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+          <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             Logout
           </a>
+          <form id="logout-form" action="{{ url('logout') }}" method="POST">
+            @csrf
+        </form>
         </li>
       </ul>

@@ -11,6 +11,8 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
+    protected $redirectTo = '/admin';
+
     public function __construct()
     {
         $this->middleware('guest:admin_web')->except('logout');
@@ -22,7 +24,7 @@ class LoginController extends Controller
  
     public function loggedOut(Request $request)
     {
-        return redirect(route('admin.login'));
+        return redirect()->route('admin.login');
     }
 
     protected function guard()
