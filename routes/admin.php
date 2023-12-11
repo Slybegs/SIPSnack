@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Admin\BankController;
@@ -12,10 +15,10 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::group(['middleware' => 'auth:admin_web'], function () {
-    Route::get('/', function () {
-        return view('admin.home');
-    })->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
+    Route::resource('admin', AdminController::class);
+    Route::resource('user', UserController::class);
     Route::resource('produk', ProdukController::class);
 
     Route::resource('bank', BankController::class);
