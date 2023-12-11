@@ -37,7 +37,7 @@
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
                 <a href="{{ route('admin.produk.index')}}" class="nav-link">
-                  <i class="nav-icon fas fa-inventory"></i>
+                  <i class="nav-icon fas fa-truck"></i>
                   <p>Produk</p>
                 </a>
             </li>

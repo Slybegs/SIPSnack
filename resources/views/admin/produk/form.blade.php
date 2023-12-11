@@ -15,12 +15,12 @@
 </div>
 <div class="form-group {{ $errors->has('harga_beli') ? 'has-error' : ''}}">
     <label for="harga_beli" class="control-label">{{ 'Harga Beli' }}</label>
-    <input class="form-control" rows="5" name="harga_beli" type="text" id="harga_beli" value="{{ isset($produk->harga_beli) ? $produk->harga_beli : ''}}" > 
+    <input class="form-control" rows="5" name="harga_beli" type="text" id="harga_beli" value="{{ isset($produk->harga_beli) ? $produk->harga_beli +0 : ''}}" > 
     {!! $errors->first('harga_beli', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('harga_jual') ? 'has-error' : ''}}">
     <label for="harga_jual" class="control-label">{{ 'Harga Jual' }}</label>
-    <input class="form-control" rows="5" name="harga_jual" type="text" id="harga_jual" value="{{ isset($produk->harga_jual) ? $produk->harga_jual : ''}}" > 
+    <input class="form-control" rows="5" name="harga_jual" type="text" id="harga_jual" value="{{ isset($produk->harga_jual) ? $produk->harga_jual+0 : ''}}" > 
     {!! $errors->first('harga_jual', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('deskripsi') ? 'has-error' : ''}}">

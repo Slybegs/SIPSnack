@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Produk</div>
                     <div class="card-body">
@@ -29,13 +29,13 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>ProdukID</th><th>Nama</th><th>Kategori</th><th>Actions</th>
+                                        <th>Kode</th><th>Nama</th><th>Kategori</th><th>Stok</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($produk as $item)
                                     <tr>
-                                        <td>{{ $item->produkID }}</td><td>{{ $item->nama }}</td><td>{{ $item->kategori }}</td>
+                                        <td>{{ $item->kode}}</td><td>{{ $item->nama }}</td><td>{{ $item->kategori }}</td><td>{{ $item->stok }}</td>
                                         <td>
                                             <a href="{{ route('admin.produk.show', ['produk' => $item->id]) }}" title="View Produk"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ route('admin.produk.edit', ['produk' => $item->id]) }}" title="Edit Produk"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

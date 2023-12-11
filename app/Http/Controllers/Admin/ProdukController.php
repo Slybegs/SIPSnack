@@ -21,7 +21,7 @@ class ProdukController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $produk = Produk::where('produkID', 'LIKE', "%$keyword%")
+            $produk = Produk::where('kode', 'LIKE', "%$keyword%")
                 ->orWhere('nama', 'LIKE', "%$keyword%")
                 ->orWhere('kategori', 'LIKE', "%$keyword%")
                 ->orWhere('deskripsi', 'LIKE', "%$keyword%")

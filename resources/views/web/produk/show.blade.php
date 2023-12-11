@@ -16,7 +16,11 @@
           </h4>
           <div class="d-flex flex-row my-3">
             <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>{{ $produk->totalTerjual() }} terjual</span>
+            @if ($produk->stok > 0)
             <span class="text-success ms-2">In stock</span>
+            @else
+            <span class="text-danger ms-2">Stok habis</span>
+            @endif
           </div>
   
           <div class="mb-3">
@@ -38,7 +42,7 @@
             <dd class="col-3 text-muted">Expired</dd>
             <dd class="col-9">{{ $produk->expired }}</dd>
           </div>
-  
+          @if ($produk->stok > 0)
           <hr>
   
           <form method="POST">
@@ -61,6 +65,7 @@
             <button type="submit" formaction="{{ route('keranjang.store') }}" class="btn btn-primary shadow-0"> <i class="fas fa-plus"></i> Keranjang </a>
             <button type="submit" formaction="{{ route('keranjang.store') }}" class="btn btn-outline-primary shadow-0 ms-2"> Beli Langsung </a>
           </form>
+          @endif
         </div>
       </main>
     </div>
